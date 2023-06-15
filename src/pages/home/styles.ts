@@ -18,6 +18,7 @@ export const Profile = styled.div`
   gap: 2rem;
 
   padding: 2rem;
+  width: 100%;
 
   background-color: ${(props) => props.theme.baseProfile};
   border-radius: 10px;

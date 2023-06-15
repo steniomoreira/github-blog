@@ -16,37 +16,65 @@ import {
   faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub as faGitHub } from '@fortawesome/free-brands-svg-icons'
+import { api } from '../../lib/axios'
+import { useEffect, useState } from 'react'
+
+type User = {
+  avatar_url: string
+  name: string
+  html_url: string
+  bio: string
+  login: string
+  company: string
+  followers: number
+}
 
 export function Home() {
+  const [user, setUser] = useState<User>({} as User)
+
+  async function getUse() {
+    const { data } = await api.get<User>('users/steniomoreira')
+
+    setUser({
+      avatar_url: data.avatar_url,
+      name: data.name,
+      html_url: data.html_url,
+      bio: data.bio,
+      login: data.login,
+      company: data.company,
+      followers: data.followers,
+    })
+  }
+
+  useEffect(() => {
+    getUse()
+  }, [])
+
   return (
     <HomeContainer>
       <Profile>
-        <img src="https://placehold.co/148/071422/AFC2D4" alt="" />
+        <img src={user.avatar_url} alt="" />
 
         <ProfileWrapper>
-          <h2>Stenio Moreira</h2>
+          <h2>{user.name}</h2>
 
-          <a href="#" target="_blank">
+          <a href={user.html_url} target="_blank" rel="noreferrer">
             Github <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </a>
 
-          <p>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </p>
+          <p>{user.bio}</p>
 
           <ul>
             <li>
               <FontAwesomeIcon icon={faGitHub} />
-              steniomoreira
+              {user.login}
             </li>
             <li>
               <FontAwesomeIcon icon={faBuilding} />
-              OSF Digital
+              {user.company}
             </li>
             <li>
-              <FontAwesomeIcon icon={faUserGroup} /> 32 seguidores
+              <FontAwesomeIcon icon={faUserGroup} /> {user.followers} seguidores
             </li>
           </ul>
         </ProfileWrapper>
