@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
   max-width: 1440px;
-  height: 100vh;
-  margin: -85px auto 0;
+  height: 100%;
+  margin: -85px auto 50px;
   padding: 0 1rem;
 
   display: flex;
@@ -57,6 +57,21 @@ export const ProfileWrapper = styled.div`
 
     :focus {
       display: none;
+    }
+
+    ::after {
+      content: '';
+      width: 0;
+      height: 1px;
+      position: absolute;
+      bottom: -2px;
+      background: ${(props) => props.theme.blue};
+    }
+
+    :hover {
+      ::after {
+        width: 100%;
+      }
     }
   }
 
@@ -129,5 +144,53 @@ export const Input = styled.input`
   }
   input:-moz-placeholder {
     color: ${(props) => props.theme.baseLabel};
+  }
+`
+
+export const PostContent = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+
+  margin-top: 3rem;
+  max-width: 864px;
+`
+
+export const Post = styled.div`
+  position: relative;
+
+  width: 416px;
+  height: 260px;
+  padding: 2rem;
+
+  background-color: ${(props) => props.theme.basePost};
+  border: 2px solid ${(props) => props.theme.basePost};
+  border-radius: 10px;
+
+  :hover {
+    border: 2px solid ${(props) => props.theme.baseLabel};
+  }
+
+  span {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+
+    color: ${(props) => props.theme.baseSpan};
+    font-size: 0.875rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    max-width: 283px;
+
+    color: ${(props) => props.theme.baseTitle};
+  }
+
+  p {
+    margin-top: 1.25rem;
+    line-height: 160%;
   }
 `
