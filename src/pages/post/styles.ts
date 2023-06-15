@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 
 export const PostContainer = styled.main`
@@ -81,6 +82,6 @@ export const Header = styled.header`
   }
 `
 
-export const Article = styled.article`
+export const Article = styled(ReactMarkdown)`
   padding: 2.5rem;
 `
