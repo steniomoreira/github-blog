@@ -23,6 +23,8 @@ export const Profile = styled.div`
   background-color: ${(props) => props.theme.baseProfile};
   border-radius: 10px;
 
+  box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
+
   img {
     background-color: ${(props) => props.theme.baseBackground};
     width: 148px;
@@ -31,6 +33,7 @@ export const Profile = styled.div`
     border-radius: 8px;
   }
 `
+
 export const ProfileWrapper = styled.div`
   position: relative;
 
@@ -79,5 +82,52 @@ export const ProfileWrapper = styled.div`
         color: ${(props) => props.theme.baseLabel};
       }
     }
+  }
+`
+
+export const SearchPost = styled.div`
+  position: relative;
+  margin-top: 4.5rem;
+
+  width: 100%;
+  max-width: 864px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: ${(props) => props.theme.baseSpan};
+    font-size: 0.875rem;
+  }
+`
+
+export const Label = styled.label`
+  color: ${(props) => props.theme.baseSubTitle};
+  font-size: 1.125rem;
+  font-weight: 700;
+  width: 100%;
+`
+
+export const Input = styled.input`
+  background-color: ${(props) => props.theme.baseInput};
+  color: ${(props) => props.theme.baseText};
+  border: 1px solid ${(props) => props.theme.baseBorder};
+  border-radius: 6px;
+
+  width: 100%;
+  height: 50px;
+
+  padding: 0.75rem 1rem;
+
+  ::-webkit-input-placeholder {
+    color: ${(props) => props.theme.baseLabel};
+  }
+  input:-moz-placeholder {
+    color: ${(props) => props.theme.baseLabel};
   }
 `

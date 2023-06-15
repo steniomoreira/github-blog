@@ -1,4 +1,11 @@
-import { HomeContainer, Profile, ProfileWrapper } from './styles'
+import {
+  HomeContainer,
+  Input,
+  Label,
+  Profile,
+  ProfileWrapper,
+  SearchPost,
+} from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBuilding,
@@ -41,6 +48,12 @@ export function Home() {
           </ul>
         </ProfileWrapper>
       </Profile>
+
+      <SearchPost>
+        <span>6 publicações</span>
+        <Label htmlFor="published">Publicações</Label>
+        <Input id="published" type="text" placeholder="Buscar conteúdo" />
+      </SearchPost>
     </HomeContainer>
   )
 }
