@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
-  max-width: 1440px;
+  max-width: 896px;
   height: 100%;
   margin: -85px auto 50px;
   padding: 0 1rem;
@@ -17,7 +17,6 @@ export const Profile = styled.div`
   grid-template-columns: 148px 1fr;
   gap: 2rem;
 
-  max-width: 864px;
   padding: 2rem;
 
   background-color: ${(props) => props.theme.baseProfile};
@@ -36,6 +35,7 @@ export const Profile = styled.div`
 
 export const ProfileWrapper = styled.div`
   position: relative;
+  margin-top: 0.5rem;
 
   h2 {
     font-size: 1.5rem;
@@ -46,6 +46,7 @@ export const ProfileWrapper = styled.div`
     color: ${(props) => props.theme.blue};
     text-transform: uppercase;
     text-decoration: none;
+    font-size: 0.75rem;
 
     display: flex;
     align-items: center;
@@ -105,7 +106,6 @@ export const SearchPost = styled.div`
   margin-top: 4.5rem;
 
   width: 100%;
-  max-width: 864px;
 
   display: flex;
   flex-direction: column;
@@ -154,7 +154,6 @@ export const PostContent = styled.div`
   gap: 32px;
 
   margin-top: 3rem;
-  max-width: 864px;
 `
 
 export const Post = styled.div`
