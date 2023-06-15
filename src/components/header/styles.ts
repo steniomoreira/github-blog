@@ -10,5 +10,9 @@ export const HeaderContainer = styled.header`
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+
+  img {
+    margin-top: 4rem;
+  }
 `

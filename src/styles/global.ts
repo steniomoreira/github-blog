@@ -15,10 +15,14 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${(props) => props.theme.baseBackground};
     color: ${(props) => props.theme.baseText};
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;   
   }
 
   body, input, textarea, button {
-    font: 400 1rem Nunito, sans-serif;
+    font: 400 1rem Nunito, sans-serif;    
+  }
+
+  ul {
+    list-style: none;
   }
 `
