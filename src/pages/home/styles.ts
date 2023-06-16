@@ -27,7 +27,6 @@ export const Profile = styled.div`
   box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
 
   img {
-    background-color: ${(props) => props.theme.baseBackground};
     width: 148px;
     height: 148px;
 
@@ -186,6 +185,10 @@ export const Post = styled.div`
 
     color: ${(props) => props.theme.baseSpan};
     font-size: 0.875rem;
+
+    ::first-letter {
+      text-transform: capitalize;
+    }
   }
 
   h2 {

@@ -9,6 +9,8 @@ import {
   ProfileWrapper,
   SearchPost,
 } from './styles'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -150,7 +152,12 @@ export function Home() {
         {posts.items?.map((post) => (
           <Link key={post.number} to="/post">
             <Post>
-              <span>{post.created_at}</span>
+              <span>
+                {formatDistanceToNow(new Date(post.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
+              </span>
               <h2>{post.title}</h2>
               <Article>{post.body.substring(0, 138).concat('...')}</Article>
             </Post>
