@@ -1,4 +1,5 @@
 import {
+  Article,
   HomeContainer,
   Input,
   Label,
@@ -17,7 +18,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub as faGitHub } from '@fortawesome/free-brands-svg-icons'
 import { api } from '../../lib/axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 type User = {
   avatar_url: string
@@ -29,8 +31,26 @@ type User = {
   followers: number
 }
 
+type PostItem = {
+  number: number
+  title: string
+  body: string
+  created_at: string
+  labels: { name: string }[]
+}
+
+type PostType = {
+  total_count: number
+  items: PostItem[]
+}
+
+type SearchFormInputs = {
+  query: string
+}
+
 export function Home() {
   const [user, setUser] = useState<User>({} as User)
+  const [posts, setPosts] = useState<PostType>({} as PostType)
 
   async function getUse() {
     const { data } = await api.get<User>('users/steniomoreira')
@@ -46,9 +66,40 @@ export function Home() {
     })
   }
 
+  const searchPosts = useCallback(async (query?: string) => {
+    const queryParams = query ? `${query}%20` : ''
+
+    const { data } = await api.get<PostType>(
+      `/search/issues?q=${queryParams}repo:steniomoreira/github-blog`,
+    )
+
+    const items = data.items.map((post: PostItem) => ({
+      number: post.number,
+      title: post.title,
+      body: post.body,
+      created_at: post.created_at,
+      labels: post.labels.map((label) => ({
+        name: label.name,
+      })),
+    }))
+
+    setPosts({ total_count: data.total_count, items })
+  }, [])
+
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting },
+  } = useForm<SearchFormInputs>()
+
+  async function handleSearchPost(data: SearchFormInputs) {
+    searchPosts(data.query)
+  }
+
   useEffect(() => {
     getUse()
-  }, [])
+    searchPosts()
+  }, [searchPosts])
 
   return (
     <HomeContainer>
@@ -80,79 +131,31 @@ export function Home() {
         </ProfileWrapper>
       </Profile>
 
-      <SearchPost>
-        <span>6 publicações</span>
+      <SearchPost onSubmit={handleSubmit(handleSearchPost)}>
+        <span>
+          {posts.total_count}{' '}
+          {`publica${posts.total_count > 1 ? 'ções' : 'ção'}`}
+        </span>
         <Label htmlFor="published">Publicações</Label>
-        <Input id="published" type="text" placeholder="Buscar conteúdo" />
+        <Input
+          id="published"
+          type="text"
+          placeholder="Buscar conteúdo"
+          disabled={isSubmitting}
+          {...register('query')}
+        />
       </SearchPost>
 
       <PostContent>
-        <Link to="/post">
-          <Post>
-            <span>Há 1 dia</span>
-            <h2>JavaScript data types and data structures</h2>
-            <p>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in...
-            </p>
-          </Post>
-        </Link>
-        <Link to="/post">
-          <Post>
-            <span>Há 1 dia</span>
-            <h2>JavaScript data types and data structures</h2>
-            <p>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in...
-            </p>
-          </Post>
-        </Link>
-        <Link to="/post">
-          <Post>
-            <span>Há 1 dia</span>
-            <h2>JavaScript data types and data structures</h2>
-            <p>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in...
-            </p>
-          </Post>
-        </Link>
-        <Link to="/post">
-          <Post>
-            <span>Há 1 dia</span>
-            <h2>JavaScript data types and data structures</h2>
-            <p>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in...
-            </p>
-          </Post>
-        </Link>
-        <Link to="/post">
-          <Post>
-            <span>Há 1 dia</span>
-            <h2>JavaScript data types and data structures</h2>
-            <p>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in...
-            </p>
-          </Post>
-        </Link>
-        <Link to="/post">
-          <Post>
-            <span>Há 1 dia</span>
-            <h2>JavaScript data types and data structures</h2>
-            <p>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in...
-            </p>
-          </Post>
-        </Link>
+        {posts.items?.map((post) => (
+          <Link key={post.number} to="/post">
+            <Post>
+              <span>{post.created_at}</span>
+              <h2>{post.title}</h2>
+              <Article>{post.body.substring(0, 138).concat('...')}</Article>
+            </Post>
+          </Link>
+        ))}
       </PostContent>
     </HomeContainer>
   )

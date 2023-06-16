@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
@@ -102,7 +103,7 @@ export const ProfileWrapper = styled.div`
   }
 `
 
-export const SearchPost = styled.div`
+export const SearchPost = styled.form`
   position: relative;
   margin-top: 4.5rem;
 
@@ -143,8 +144,14 @@ export const Input = styled.input`
   ::-webkit-input-placeholder {
     color: ${(props) => props.theme.baseLabel};
   }
+
   input:-moz-placeholder {
     color: ${(props) => props.theme.baseLabel};
+  }
+
+  :disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `
 
@@ -188,9 +195,9 @@ export const Post = styled.div`
 
     color: ${(props) => props.theme.baseTitle};
   }
+`
 
-  p {
-    margin-top: 1.25rem;
-    line-height: 160%;
-  }
+export const Article = styled(ReactMarkdown)`
+  margin-top: 1.25rem;
+  line-height: 160%;
 `
