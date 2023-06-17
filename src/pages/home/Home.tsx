@@ -1,5 +1,18 @@
+import { api } from '../../lib/axios'
+import removeMD from 'remove-markdown'
+import { useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { Link } from 'react-router-dom'
+import { faGithub as faGitHub } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  Article,
+  faBuilding,
+  faUserGroup,
+  faArrowUpRightFromSquare,
+} from '@fortawesome/free-solid-svg-icons'
+import {
   HomeContainer,
   Input,
   Label,
@@ -9,19 +22,6 @@ import {
   ProfileWrapper,
   SearchPost,
 } from './styles'
-import { formatDistanceToNow } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faBuilding,
-  faUserGroup,
-  faArrowUpRightFromSquare,
-} from '@fortawesome/free-solid-svg-icons'
-import { faGithub as faGitHub } from '@fortawesome/free-brands-svg-icons'
-import { api } from '../../lib/axios'
-import { useCallback, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 type User = {
   avatar_url: string
@@ -39,6 +39,7 @@ type PostItem = {
   body: string
   created_at: string
   labels: { name: string }[]
+  comments: number
 }
 
 type PostType = {
@@ -78,11 +79,12 @@ export function Home() {
     const items = data.items.map((post: PostItem) => ({
       number: post.number,
       title: post.title,
-      body: post.body,
+      body: removeMD(post.body),
       created_at: post.created_at,
       labels: post.labels.map((label) => ({
         name: label.name,
       })),
+      comments: post.comments,
     }))
 
     setPosts({ total_count: data.total_count, items })
@@ -150,7 +152,7 @@ export function Home() {
 
       <PostContent>
         {posts.items?.map((post) => (
-          <Link key={post.number} to="/post">
+          <Link key={post.number} to={`/post/${post.number}`}>
             <Post>
               <span>
                 {formatDistanceToNow(new Date(post.created_at), {
@@ -159,7 +161,7 @@ export function Home() {
                 })}
               </span>
               <h2>{post.title}</h2>
-              <Article>{post.body.substring(0, 138).concat('...')}</Article>
+              <p>{post.body}</p>
             </Post>
           </Link>
         ))}

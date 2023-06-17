@@ -83,5 +83,15 @@ export const Header = styled.header`
 `
 
 export const Article = styled(ReactMarkdown)`
+  width: 100%;
   padding: 2.5rem;
+  white-space: pre-wrap;
+
+  a {
+    color: ${(props) => props.theme.blue};
+  }
+
+  img {
+    max-width: 100%;
+  }
 `

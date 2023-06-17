@@ -1,4 +1,3 @@
-import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
@@ -198,9 +197,14 @@ export const Post = styled.div`
 
     color: ${(props) => props.theme.baseTitle};
   }
-`
 
-export const Article = styled(ReactMarkdown)`
-  margin-top: 1.25rem;
-  line-height: 160%;
+  p {
+    margin-top: 1.25rem;
+    line-height: 160%;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 `
