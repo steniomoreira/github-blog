@@ -22,30 +22,8 @@ import {
   ProfileWrapper,
   SearchPost,
 } from './styles'
-
-type User = {
-  avatar_url: string
-  name: string
-  html_url: string
-  bio: string
-  login: string
-  company: string
-  followers: number
-}
-
-type PostItem = {
-  number: number
-  title: string
-  body: string
-  created_at: string
-  labels: { name: string }[]
-  comments: number
-}
-
-type PostType = {
-  total_count: number
-  items: PostItem[]
-}
+import { User } from '../../types/user'
+import { PostItem, PostType } from '../../types/post'
 
 type SearchFormInputs = {
   query: string
@@ -69,23 +47,23 @@ export function Home() {
     })
   }
 
-  const searchPosts = useCallback(async (query?: string) => {
-    const queryParams = query ? `${query}%20` : ''
+  const searchPosts = useCallback(async (query = '') => {
+    const { data } = await api.get<PostType>('/search/issues', {
+      params: {
+        q: `repo:steniomoreira/github-blog ${query}`,
+      },
+    })
 
-    const { data } = await api.get<PostType>(
-      `/search/issues?q=${queryParams}repo:steniomoreira/github-blog`,
+    const items = data.items.map(
+      ({ number, title, body, created_at, labels, comments }: PostItem) => ({
+        number,
+        title,
+        created_at,
+        comments,
+        body: removeMD(body),
+        labels: labels.map(({ name }) => ({ name })),
+      }),
     )
-
-    const items = data.items.map((post: PostItem) => ({
-      number: post.number,
-      title: post.title,
-      body: removeMD(post.body),
-      created_at: post.created_at,
-      labels: post.labels.map((label) => ({
-        name: label.name,
-      })),
-      comments: post.comments,
-    }))
 
     setPosts({ total_count: data.total_count, items })
   }, [])

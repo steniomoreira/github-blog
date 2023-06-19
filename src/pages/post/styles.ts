@@ -91,6 +91,11 @@ export const Article = styled(ReactMarkdown)`
     color: ${(props) => props.theme.blue};
   }
 
+  ul {
+    list-style: inherit;
+    margin-left: 1.5rem;
+  }
+
   img {
     max-width: 100%;
   }

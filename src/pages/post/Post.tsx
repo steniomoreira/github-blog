@@ -12,28 +12,23 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { Article, Header, PostContainer } from './styles'
+import { PostItem } from '../../types/post'
 
 type User = {
   login: string
 }
 
-type PostItem = {
-  number: number
-  title: string
-  body: string
-  created_at: string
-  labels: { name: string }[]
-  comments: number
+type IssueType = PostItem & {
   html_url: string
   user: User
 }
 
 export function Post() {
-  const [post, setPost] = useState<PostItem>({} as PostItem)
+  const [post, setPost] = useState<IssueType>({} as IssueType)
   const issueNumber = useParams().number
 
   const getPost = useCallback(async (number: number) => {
-    const { data } = await api.get<PostItem>(
+    const { data } = await api.get<IssueType>(
       `/repos/steniomoreira/github-blog/issues/${number}`,
     )
 
@@ -42,9 +37,7 @@ export function Post() {
       title: data.title,
       body: data.body,
       created_at: data.created_at,
-      labels: data.labels.map((label) => ({
-        name: label.name,
-      })),
+      labels: data.labels.map(({ name }) => ({ name })),
       comments: data.comments,
       html_url: data.html_url,
       user: data.user,
@@ -91,7 +84,7 @@ export function Post() {
         </ul>
       </Header>
 
-      <Article>{post.body}</Article>
+      <Article linkTarget="_blank">{post.body}</Article>
     </PostContainer>
   )
 }
