@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-import { api } from '../../lib/axios'
 import { Link, useParams } from 'react-router-dom'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -12,35 +11,16 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { Article, Header, PostContainer } from './styles'
-import { PostItem } from '../../types/post'
-
-type User = {
-  login: string
-}
-
-type IssueType = PostItem & {
-  html_url: string
-  user: User
-}
+import { IssueType } from '../../types/post'
+import { fetchPost } from '../../services/githubServices'
 
 export function Post() {
   const [post, setPost] = useState<IssueType>({} as IssueType)
   const issueNumber = useParams().number
 
   const getPost = useCallback(async (number: number) => {
-    const { data } = await api.get<IssueType>(
-      `/repos/steniomoreira/github-blog/issues/${number}`,
-    )
-
-    setPost({
-      number: data.number,
-      title: data.title,
-      body: data.body,
-      created_at: data.created_at,
-      labels: data.labels.map(({ name }) => ({ name })),
-      comments: data.comments,
-      html_url: data.html_url,
-      user: data.user,
+    fetchPost(number).then((data) => {
+      setPost(data)
     })
   }, [])
 

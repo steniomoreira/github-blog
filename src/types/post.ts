@@ -11,3 +11,12 @@ export type PostType = {
   total_count: number
   items: PostItem[]
 }
+
+type IssueUser = {
+  login: string
+}
+
+export type IssueType = PostItem & {
+  html_url: string
+  user: IssueUser
+}

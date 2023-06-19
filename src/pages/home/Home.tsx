@@ -1,6 +1,4 @@
-import { api } from '../../lib/axios'
-import removeMD from 'remove-markdown'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
@@ -23,7 +21,8 @@ import {
   SearchPost,
 } from './styles'
 import { User } from '../../types/user'
-import { PostItem, PostType } from '../../types/post'
+import { PostType } from '../../types/post'
+import { fetchUser, searchPosts } from '../../services/githubServices'
 
 type SearchFormInputs = {
   query: string
@@ -34,54 +33,26 @@ export function Home() {
   const [posts, setPosts] = useState<PostType>({} as PostType)
 
   async function getUse() {
-    const { data } = await api.get<User>('users/steniomoreira')
-
-    setUser({
-      avatar_url: data.avatar_url,
-      name: data.name,
-      html_url: data.html_url,
-      bio: data.bio,
-      login: data.login,
-      company: data.company,
-      followers: data.followers,
+    fetchUser().then((data) => {
+      setUser(data)
     })
   }
-
-  const searchPosts = useCallback(async (query = '') => {
-    const { data } = await api.get<PostType>('/search/issues', {
-      params: {
-        q: `repo:steniomoreira/github-blog ${query}`,
-      },
-    })
-
-    const items = data.items.map(
-      ({ number, title, body, created_at, labels, comments }: PostItem) => ({
-        number,
-        title,
-        created_at,
-        comments,
-        body: removeMD(body),
-        labels: labels.map(({ name }) => ({ name })),
-      }),
-    )
-
-    setPosts({ total_count: data.total_count, items })
-  }, [])
-
   const {
     handleSubmit,
     register,
     formState: { isSubmitting },
   } = useForm<SearchFormInputs>()
 
-  async function handleSearchPost(data: SearchFormInputs) {
-    searchPosts(data.query)
+  async function handleSearchPost(data?: SearchFormInputs) {
+    searchPosts(data?.query).then((data) => {
+      setPosts(data)
+    })
   }
 
   useEffect(() => {
     getUse()
-    searchPosts()
-  }, [searchPosts])
+    handleSearchPost()
+  }, [])
 
   return (
     <HomeContainer>
