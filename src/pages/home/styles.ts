@@ -64,7 +64,7 @@ export const ProfileWrapper = styled.div`
     right: 0;
 
     :focus {
-      display: none;
+      box-shadow: none;
     }
 
     ::after {

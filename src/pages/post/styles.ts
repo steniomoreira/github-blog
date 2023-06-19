@@ -39,7 +39,7 @@ export const Header = styled.header`
       gap: 8px;
 
       :focus {
-        display: none;
+        box-shadow: none;
       }
 
       ::after {
