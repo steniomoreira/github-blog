@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { devices } from '../../constants/mediaQueries'
 
 export const HomeContainer = styled.main`
   max-width: 896px;
@@ -30,6 +31,12 @@ export const Profile = styled.div`
     height: 148px;
 
     border-radius: 8px;
+  }
+
+  @media ${devices.mobileL} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `
 
@@ -99,6 +106,39 @@ export const ProfileWrapper = styled.div`
       }
     }
   }
+
+  @media ${devices.mobileM} {
+    ul {
+      flex-direction: column;
+    }
+  }
+
+  @media ${devices.mobileL} {
+    h2,
+    p {
+      text-align: center;
+    }
+
+    a {
+      top: -1.2rem;
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+
+    ul li {
+      font-size: 0.875rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        margin: 0;
+      }
+    }
+  }
 `
 
 export const SearchPost = styled.form`
@@ -165,7 +205,7 @@ export const PostContent = styled.div`
 export const Post = styled.div`
   position: relative;
 
-  width: 416px;
+  max-width: 416px;
   height: 260px;
   padding: 2rem;
 
@@ -206,5 +246,16 @@ export const Post = styled.div`
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  @media ${devices.mobileL} {
+    span {
+      margin-top: -1rem;
+    }
+
+    h2 {
+      margin-top: 0.5rem;
+      max-width: 100%;
+    }
   }
 `
