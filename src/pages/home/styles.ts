@@ -127,7 +127,7 @@ export const ProfileWrapper = styled.div`
     }
 
     ul li {
-      font-size: 0.875rem;
+      font-size: 0.75rem;
 
       display: flex;
       flex-direction: column;

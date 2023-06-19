@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
+import { devices } from '../../constants/mediaQueries'
 
 export const PostContainer = styled.main`
   max-width: 896px;
@@ -80,6 +81,32 @@ export const Header = styled.header`
       }
     }
   }
+
+  @media ${devices.mobileM} {
+    ul {
+      flex-direction: column;
+    }
+  }
+
+  @media ${devices.mobileL} {
+    ul {
+      margin-top: 1rem;
+      justify-content: center;
+
+      li {
+        font-size: 0.75rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+
+        svg {
+          margin: 0;
+        }
+      }
+    }
+  }
 `
 
 export const Article = styled(ReactMarkdown)`
@@ -98,5 +125,9 @@ export const Article = styled(ReactMarkdown)`
 
   img {
     max-width: 100%;
+  }
+
+  @media ${devices.mobileL} {
+    padding: 2.5rem 0;
   }
 `
