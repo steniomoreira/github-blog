@@ -50,7 +50,7 @@ export const ProfileWrapper = styled.div`
   }
 
   a {
-    position: absolute;
+    position: absolute !important;
     top: 0;
     right: 0;
   }
