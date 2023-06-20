@@ -23,6 +23,7 @@ import {
 import { User } from '../../types/user'
 import { PostType } from '../../types/post'
 import { fetchUser, searchPosts } from '../../services/githubServices'
+import { LinkNav } from '../../components/linkNav/LinkNav'
 
 type SearchFormInputs = {
   query: string
@@ -62,9 +63,9 @@ export function Home() {
         <ProfileWrapper>
           <h2>{user.name}</h2>
 
-          <a href={user.html_url} target="_blank" rel="noreferrer">
+          <LinkNav to={user.html_url}>
             Github <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-          </a>
+          </LinkNav>
 
           <p>{user.bio}</p>
 

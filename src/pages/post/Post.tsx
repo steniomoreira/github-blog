@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -13,6 +13,7 @@ import {
 import { Article, Header, PostContainer } from './styles'
 import { IssueType } from '../../types/post'
 import { fetchPost } from '../../services/githubServices'
+import { LinkNav } from '../../components/linkNav/LinkNav'
 
 export function Post() {
   const [post, setPost] = useState<IssueType>({} as IssueType)
@@ -32,14 +33,14 @@ export function Post() {
     <PostContainer>
       <Header>
         <nav>
-          <Link to="/">
+          <LinkNav to="/">
             <FontAwesomeIcon icon={faChevronLeft} />
             Voltar
-          </Link>
+          </LinkNav>
 
-          <a href={post.html_url} target="_blank" rel="noreferrer">
+          <LinkNav to={post.html_url}>
             Ver no Github <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-          </a>
+          </LinkNav>
         </nav>
 
         <h1>{post.title}</h1>

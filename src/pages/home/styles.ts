@@ -50,37 +50,9 @@ export const ProfileWrapper = styled.div`
   }
 
   a {
-    color: ${(props) => props.theme.blue};
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: 0.75rem;
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
     position: absolute;
     top: 0;
     right: 0;
-
-    :focus {
-      box-shadow: none;
-    }
-
-    ::after {
-      content: '';
-      width: 0;
-      height: 1px;
-      position: absolute;
-      bottom: -2px;
-      background: ${(props) => props.theme.blue};
-    }
-
-    :hover {
-      ::after {
-        width: 100%;
-      }
-    }
   }
 
   p {
