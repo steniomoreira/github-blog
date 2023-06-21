@@ -100,7 +100,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Utilitários**
 
--   Protótipo:  **[Figma](https://www.figma.com/)**  →  **[Protótipo (Ecoleta)](https://www.figma.com/file/PBmEcpW8ilEqHcSRawad5R)**
+-   Protótipo:  **[Figma](https://www.figma.com/)**  →  **[Protótipo (Github blog)](https://www.figma.com/file/PBmEcpW8ilEqHcSRawad5R)**
 -   Editor:  **[Visual Studio Code](https://code.visualstudio.com/)**
 -   Markdown:  **[React Markdown](https://github.com/remarkjs/react-markdown)**
 -   Commit Conventional:  **[Commitlint](https://github.com/conventional-changelog/commitlint)**
