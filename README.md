@@ -34,13 +34,13 @@
 ### Mobile
 
 <p align="center">
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/mobile.png" width="200px">
+  <img alt="GithuBlog" title="#GithuBlog" src=".github/mobile.png" width="600px">
 </p>
 
 ### Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/web.png" width="400px">
+  <img alt="GithuBlog" title="#GithuBlog" src=".github/web.png" width="1000px">
 </p>
 
 ## 🚀 Como executar o projeto
