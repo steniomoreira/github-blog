@@ -63,9 +63,8 @@ $ cd github-blog
 
 ```
 
-Adicione o arquivo .env.local na raiz do projeto com as seguites variáves de ambiente
-
 ```bash
+# Adicione o arquivo .env.local na raiz do projeto com as seguites variáves de ambiente
   VITE_GITHUB_USER = seu-user-name
   VITE_GITHUB_REPO = github-blog
 
