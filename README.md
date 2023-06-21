@@ -17,7 +17,7 @@
 
 ## 💻 Sobre o projeto
 
-🗒️ Essa aplicação é utilizada a API do GitHub para buscar issues de um repositório, dados do perfil e exibir elas como um blog.
+🗒️ Nesta aplicação é utilizada a API do GitHub para buscar issues de um repositório, dados do perfil e exibir elas como um blog.
 
 ---
 
@@ -34,21 +34,13 @@
 ### Mobile
 
 <p align="center">
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/mobile01.png" width="200px">
-
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/mobile02.png" width="200px">
-
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/mobile03.png" width="200px">
+  <img alt="GithuBlog" title="#GithuBlog" src=".github/mobile.png" width="200px">
 </p>
 
 ### Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/web01.png" width="400px">
-
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/web02.png" width="400px">
-
-  <img alt="GithuBlog" title="#GithuBlog" src=".github/web03.png" width="400px">
+  <img alt="GithuBlog" title="#GithuBlog" src=".github/web.png" width="400px">
 </p>
 
 ## 🚀 Como executar o projeto
@@ -68,6 +60,18 @@ $ git clone git@github.com:steniomoreira/github-blog.git
 
 # Acesse a pasta do projeto no seu terminal/cmd
 $ cd github-blog
+
+```
+
+Adicione o arquivo .env.local na raiz do projeto com as seguites variáves de ambiente
+
+```bash
+  VITE_GITHUB_USER = seu-user-name
+  VITE_GITHUB_REPO = github-blog
+
+```
+
+```bash
 
 # Instale as dependências
 $ npm install
