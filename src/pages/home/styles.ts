@@ -49,12 +49,6 @@ export const ProfileWrapper = styled.div`
     font-weight: 700;
   }
 
-  a {
-    position: absolute !important;
-    top: 0;
-    right: 0;
-  }
-
   p {
     font-size: 1rem;
     line-height: 160%;
@@ -79,6 +73,12 @@ export const ProfileWrapper = styled.div`
     }
   }
 
+  .linkNav {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   @media ${devices.mobileM} {
     ul {
       flex-direction: column;
@@ -89,13 +89,6 @@ export const ProfileWrapper = styled.div`
     h2,
     p {
       text-align: center;
-    }
-
-    a {
-      top: -1.2rem;
-      width: 100%;
-      text-align: center;
-      display: block;
     }
 
     ul li {
@@ -109,6 +102,14 @@ export const ProfileWrapper = styled.div`
       svg {
         margin: 0;
       }
+    }
+
+    .linkNav {
+      top: -1.2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `

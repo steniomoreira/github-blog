@@ -11,7 +11,7 @@ export function LinkNav({ to, children }: LinkProp) {
   const internalLink = to?.startsWith('/')
 
   return (
-    <LinkContainer>
+    <LinkContainer className="linkNav">
       {internalLink ? (
         <Link to="/">{children}</Link>
       ) : (
